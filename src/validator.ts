@@ -18,7 +18,10 @@ const queryValidator = (
   const width: number = parseInt(widthParam);
   const height: number = parseInt(heightParam);
 
-  if (isNaN(width) || isNaN(height)) res.end('width or height is invalid');
+  if (isNaN(width) || isNaN(height)) {
+    req.query.err = 'width or height is invalid';
+    next();
+  }
   next();
 };
 

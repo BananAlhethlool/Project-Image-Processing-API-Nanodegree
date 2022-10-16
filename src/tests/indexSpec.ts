@@ -1,10 +1,25 @@
-import myFunc from './index'
+import supertest from 'supertest';
+import app from "../index"
 
-describe('General test', () => {
-  it('expect myFunc(5) to equal 25', () => {
-    expect(myFunc(5)).toEqual(25);
+const request = supertest(app);
+
+  describe('Test bad image width', (): void => {
+        it('Response status 400 should be returned when sending bad value', async (): Promise<void> => {
+            const response = await request.get(`/image?filename=fjord&height=123&width=ksa`);
+            expect(response.status).toEqual(400);
+        });
+    });
+    
+    describe('Test with image that does not exisit', (): void => {
+      it('Response status 400 should be returned when sending bad value', async (): Promise<void> => {
+          const response = await request.get(`/image?filename=mynewimage&height=123&width=124`);
+          expect(response.status).toEqual(400);
+      });
   });
-  it('expect myFunc(6) to equal 36', () => {
-    expect(myFunc(6)).toEqual(36);
-  });
+
+  describe('Test with image that goes well', (): void => {
+    it('Response status 200 should be returned ', async (): Promise<void> => {
+        const response = await request.get(`/image?filename=fjord&height=50&width=255`);
+        expect(response.status).toEqual(200);
+    });
 });

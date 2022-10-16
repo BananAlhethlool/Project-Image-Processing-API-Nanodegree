@@ -13,15 +13,22 @@ app.get(
   '/image',
   imagesMiddleWare,
   (req: express.Request, res: express.Response) => {
-    const finalImageName = req.query.finalImageName as string;
+    if (req.query.err) {
+      res.writeHead(400);
+      res.end(req.query.err);
+    } else {
+      const finalImageName = req.query.finalImageName as string;
 
-    imageFetcher(finalImageName).then((image) => {
-      res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-      res.end(image);
-    });
+      imageFetcher(finalImageName).then((image) => {
+        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+        res.end(image);
+      });
+    }
   }
 );
 
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`);
 });
+
+export default app;
