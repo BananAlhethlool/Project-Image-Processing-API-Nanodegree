@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 const imageHandler = (
   req: express.Request,
   res: express.Response,
-  next: Next
+  next: express.NextFunction
 ): void => {
   if (req.query.err) {
     next();

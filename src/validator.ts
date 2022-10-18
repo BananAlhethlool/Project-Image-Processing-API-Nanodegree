@@ -3,7 +3,7 @@ import express from 'express';
 const queryValidator = (
   req: express.Request,
   res: express.Response,
-  next: Next
+  next: express.NextFunction
 ): void => {
   const userQuery = req.query;
   if (

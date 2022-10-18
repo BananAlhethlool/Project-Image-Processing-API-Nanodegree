@@ -6,7 +6,7 @@ import fs from 'fs';
 const imageManipulator = (
   req: express.Request,
   res: express.Response,
-  next: Next
+  next: express.NextFunction
 ): void => {
   if (req.query.err) {
     next();
