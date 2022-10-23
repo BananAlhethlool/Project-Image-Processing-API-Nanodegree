@@ -1,5 +1,6 @@
 import express from 'express';
 import { promises as fs } from 'fs';
+import path from 'path';
 
 const imageHandler = (
   req: express.Request,
@@ -25,7 +26,7 @@ const imageHandler = (
 
     req.query.finalImageName = finalImageName;
 
-    fs.stat(__dirname + '\\modified\\' + finalImageName)
+    fs.stat(path.join(__dirname, 'modified', finalImageName))
       .then(() => {
         req.query.manipulateImage = 'false';
         next();

@@ -15,14 +15,15 @@ const queryValidator = (
   }
   const widthParam: string = req.query.width as string;
   const heightParam: string = req.query.height as string;
-  const width: number = parseInt(widthParam);
-  const height: number = parseInt(heightParam);
 
-  if (isNaN(width) || isNaN(height)) {
+  if (!isAllDigits(widthParam) || !isAllDigits(heightParam)) {
     req.query.err = 'width or height is invalid';
     next();
   }
   next();
 };
+function isAllDigits(testString: string): boolean {
+  return /^\d+$/.test(testString);
+}
 
 export default queryValidator;

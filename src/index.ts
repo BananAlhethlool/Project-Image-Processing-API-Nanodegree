@@ -1,7 +1,7 @@
 import express from 'express';
 import imageHandlerMW from './images';
 import queryValidator from './validator';
-import imageManipulator from './imageManipulator';
+import { imageManipulator } from './imageManipulator';
 import imageFetcher from './imageFetcher';
 
 const app = express();
